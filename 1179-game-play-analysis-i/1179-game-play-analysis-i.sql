@@ -11,8 +11,13 @@
 --      WHERE a1.player_id = a2.player_id
 --      )
 
-SELECT 
-    player_id, 
-    MIN(event_date) AS first_login
+-- SELECT 
+--     player_id, 
+--     MIN(event_date) AS first_login
+-- FROM Activity
+-- GROUP BY player_id;
+
+-- Window Function. 
+SELECT DISTINCT player_id  , 
+    MIN(event_date) OVER(PARTITION BY player_id) AS first_login
 FROM Activity
-GROUP BY player_id;
